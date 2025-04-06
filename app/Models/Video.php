@@ -18,6 +18,8 @@ class Video extends Model
         'views',
         'is_published',
     ];
+
+    
     public function category()
     {
         return $this->belongsTo(Category::class);
