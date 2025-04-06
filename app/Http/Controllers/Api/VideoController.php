@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Jobs\ProcessVideo;
 use App\Models\Video;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class VideoController extends Controller
         ]);
 
         $video = Video::create($request->all());
-
+        ProcessVideo::dispatch($video->id);
         return response()->json($video, 201);
     }
 
