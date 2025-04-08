@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Api\VideoController;
+use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -25,4 +26,11 @@ Route::prefix('videos')->group(function () {
     Route::get('{id}', [VideoController::class, 'show']);       // Get a single video
     Route::middleware(['auth:sanctum'])->post('/', [VideoController::class, 'store']);        // Create video
     Route::middleware(['auth:sanctum'])->put('{id}', [VideoController::class, 'update']);     // Update video
+});
+
+Route::prefix('categories')->group(function () {
+    Route::get('/', [CategoryController::class, 'index']);         // List categories
+    Route::get('{id}', [CategoryController::class, 'show']);       // Get a single category
+    Route::middleware(['auth:sanctum'])->post('/', [CategoryController::class, 'store']);        // Create category
+    Route::middleware(['auth:sanctum'])->put('{id}', [CategoryController::class, 'update']);     // Update category
 });
