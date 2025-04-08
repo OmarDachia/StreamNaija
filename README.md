@@ -69,19 +69,19 @@ Got it! If you're **cloning a Laravel 12 project that uses Vite from a repositor
 
 ---
 
-## ✅ 1. Clone the Repository
+## 1. Clone the Repository
 
 git clone https://github.com/your-username/your-laravel-project.git
 cd your-laravel-project
 
 
-## ✅ 2. Install PHP Dependencies
+## 2. Install PHP Dependencies
 
 Make sure you have PHP ≥ 8.2 and Composer installed.
 
 composer install
 
-## ✅ 3. Install Node Dependencies
+## 3. Install Node Dependencies
 
 Make sure you have Node.js ≥ 16 and npm or yarn.
 
@@ -90,20 +90,20 @@ npm install
 # or
 yarn install
 
-## ✅ 4. Copy and Configure `.env` File
+## 4. Copy and Configure `.env` File
 
 cp .env.example .env
 php artisan key:generate
 
 Update `.env` with your database and app settings.
 
-## ✅ 5. Run Database Migrations
+## 5. Run Database Migrations
 
 Make sure your database is set up and running:
 
 php artisan migrate
 
-## ✅ 6. Build Frontend Assets with Vite
+## 6. Build Frontend Assets with Vite
 
 For development:
 
@@ -114,13 +114,13 @@ For production build:
 npm run build
 
 
-## ✅ 7. Start the Laravel Development Server
+## 7. Start the Laravel Development Server
 
 php artisan serve
 
 Your app should now be running at [http://localhost:8000](http://localhost:8000)
 
-## ✅ 8. If Using Vue or React
+## 8. Using Vue
 
 Make sure the correct frontend framework is installed:
 
@@ -132,7 +132,7 @@ Make sure the correct frontend framework is installed:
 
 And ensure your `vite.config.js` is set up accordingly.
 
-## ✅ 9. Check for `@vite` in Blade
+## 9. Check for `@vite` in Blade
 
 In your layout/view file (`resources/views/layouts/app.blade.php` or similar), ensure this is present:
 
