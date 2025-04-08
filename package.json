@@ -16,8 +16,11 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@videojs/http-streaming": "^3.17.0",
+        "axios": "^1.8.4",
         "bootstrap": "^5.3.5",
         "pinia": "^3.0.1",
+        "video.js": "^8.22.0",
         "vue-router": "^4.5.0"
     }
 }

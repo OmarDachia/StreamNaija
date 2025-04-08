@@ -3,6 +3,14 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    <IfModule mod_mime.c>
+        AddType video/mp4 .mp4
+        AddType video/webm .webm
+        AddType video/ogg .ogv
+        AddType image/jpeg .jpg
+        AddType image/png .png
+    </IfModule>
+
     RewriteEngine On
 
     # Handle Authorization Header

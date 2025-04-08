@@ -13,8 +13,9 @@ export default defineConfig({
                 transformAssetUrls: {
                     base: null,
                     includeAbsolute: false,
+                    copyPublic: true,
                 },
             },
         }),
-    ],
+    ]
 });
