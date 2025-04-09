@@ -33,17 +33,6 @@ onMounted(async () => {
     }
 });
 
-// Extract unique categories from videos
-// const final_categories = computed(() => {
-//   // Get all non-empty categories
-    
-//   // Get unique categories and sort them
-//   const uniqueCategories = [...new Set(categories)].sort();
-  
-//   // Add 'All' as the first option
-//   return ['All', ...uniqueCategories];
-// });
-
 // Filter videos based on selected category
 const filteredVideos = computed(() => {
     if (selectedCategory.value === 'all') {
@@ -56,49 +45,14 @@ const filteredVideos = computed(() => {
 
 <template>
     <Head title="Home" />
-    <!-- <div id ="theme" class="page-content">
-        <div v-if="loading">Loading...</div>
+     <div id="theme" class="page-content">
         <div class="top">
             <div class="columns">
                 <div class="column is-full featured_wrapper p-0">
                     <img src="/images/gridallbum1.png" class="featured">
                     <div class="title_wrapper">
                         <span class="has-text-white">Trending Today</span>
-                        <h1 class="title is-1 has-text-white">The Untold Story of the great Lorem Ipsum</h1>
-                        <button class="button is-medium">Watch It Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="columns is-multiline p-0 pt-6 last">
-                <div class="column is-full">
-                    <p class="has-text-white">Action Movies Collection</p>
-                </div>
-                
-                <div class="column is-one-quarter" v-for="video in videos" :key="video.id">
-                    {{ video.title }}
-                    <img src="/images/gridallbum1.png">
-
-                    <div class="playButton floating-button">
-                        <div class="playPause"></div>
-                    </div>
-
-                </div>
-                
-            </div>
-            
-        </div> 
-    </div> -->
-
-    <div id="theme" class="page-content">
-        <div class="top">
-            <div class="columns">
-                <div class="column is-full featured_wrapper p-0">
-                    <img src="/images/gridallbum1.png" class="featured">
-                    <div class="title_wrapper">
-                        <span class="has-text-white">Trending Today</span>
-                        <h1 class="title is-1 has-text-white">The Untold Story of the great Lorem Ipsum</h1>
+                        <h1 class="title is-1 has-text-white">The Untold Story of the great Me man</h1>
                         <button class="button is-medium">Watch It Now</button>
                     </div>
                 </div>

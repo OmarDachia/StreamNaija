@@ -17,6 +17,7 @@ use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Checkbox;
 use App\Models\Category as Categories;
 use Filament\Forms\Components\Placeholder;
+use Filament\Tables\Columns\CheckboxColumn;
 
 class VideoResource extends Resource
 {
@@ -69,6 +70,7 @@ class VideoResource extends Resource
                             Forms\Components\FileUpload::make('video_url')
                                 ->label('Video')
                                 ->image()
+                                ->acceptedFileTypes(['video/mp4', 'video/avi', 'video/mov'])
                                 ->disk('public')->directory('Videos')
                                 ->required(),
                             Checkbox::make('is_published')
@@ -94,8 +96,9 @@ class VideoResource extends Resource
                 Tables\Columns\TextColumn::make('views')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\CheckboxColumn::make('is_published')
-                    ->boolean(),
+                CheckboxColumn::make('is_published')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

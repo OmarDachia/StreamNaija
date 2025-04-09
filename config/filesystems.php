@@ -45,6 +45,7 @@ return [
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
+            'max_size' => 20480,
         ],
 
         's3' => [
