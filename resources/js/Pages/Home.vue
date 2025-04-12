@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3';
 import BaseLayout from '@/Components/BaseLayout.vue';
 // import imageUrl from '/images/gridallbum1.jpg'
+import { router } from '@inertiajs/vue3';
 
 defineOptions({ layout: BaseLayout})
 
@@ -13,6 +14,27 @@ const categories = ref([]);
 const loading = ref(false);
 const error = ref(null);
 const selectedCategory = ref('all')
+const searchQuery = ref('');
+const lastVideo = ref([]);
+
+// const filteredVideos = computed(() => {
+//     let filtered = videos.value;
+    
+//     // Apply category filter
+//     if (selectedCategory.value !== 'all') {
+//         filtered = filtered.filter(video => video.category_id === selectedCategory.value);
+//     }
+    
+//     // Apply search filter
+//     if (searchQuery.value) {
+//         const query = searchQuery.value.toLowerCase();
+//         filtered = filtered.filter(video => 
+//             video.title.toLowerCase().includes(query)
+//         );
+//     }
+    
+//     return filtered;
+// });
 
 onMounted(async () => {
     try {
@@ -21,6 +43,9 @@ onMounted(async () => {
         if (!response.ok) throw new Error('Network response was not ok');
         videos.value = await response.json();
         videos.value = videos.value.data;
+
+        lastVideo = videos.value[videos.value.length - 1];
+        console.log('Last video:', lastVideo);
         // category
         const cat_response = await fetch(import.meta.env.VITE_API_BASE_URL + '/api/categories');
         if (!cat_response.ok) throw new Error('Network response was not ok');
@@ -41,16 +66,11 @@ const filteredVideos = computed(() => {
     return videos.value.filter(video => video.category_id === selectedCategory.value);
 });
 
-// This will hold the selected video data
-const selectedVideo = ref(null)
-
 function playVideo(video) {
-  selectedVideo.value = {
-    url: `/storage/videos/${video.filename}`,
-    poster: video.thumbnail || '/images/fallback.jpg'
-  }
+    router.post(route('videos.show'), {
+        video: video
+    });
 }
-
 </script>
 
 <template>
@@ -59,7 +79,8 @@ function playVideo(video) {
         <div class="top">
             <div class="columns">
                 <div class="column is-full featured_wrapper p-0">
-                    <img src="/images/gridallbum1.png" class="featured">
+                    <!-- <img :src="'/storage/' +  lastVideo.thumbnail_url" class="featured"> -->
+                    <img src="/images/gridallbum10.png" class="featured">
                     <div class="title_wrapper">
                         <span class="has-text-white">Trending Today</span>
                         <h1 class="title is-1 has-text-white">The Untold Story of the great Me man</h1>
@@ -72,27 +93,48 @@ function playVideo(video) {
             <!-- Category Filter -->
             <div class="columns is-multiline p-0 pt-6">
                 <div class="column is-full">
-                    <div class="field is-horizontal">
-                        <div class="field-label is-normal">
-                            <label class="label has-text-white">Filter by Category:</label>
-                        </div>
-                        <div class="field-body">
-                            <div class="field">
-                                <div class="control">
-                                    <div class="select">
-                                        <select v-model="selectedCategory">
-                                            <option value="all">
-                                                All
-                                            </option>
-                                            <option v-for="category in categories" :key="category.id" :value="category.id">
-                                                {{ category.name }}
-                                            </option>
-                                        </select>
+                    <div class="col-md-6">
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label has-text-white">Filter by Category:</label>
+                            </div>
+                            
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control">
+                                        <div class="select">
+                                            <select v-model="selectedCategory">
+                                                <option value="all">
+                                                    All
+                                                </option>
+                                                <option v-for="category in categories" :key="category.id" :value="category.id">
+                                                    {{ category.name }}
+                                                </option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="field">
+                            
+                            <div class="control has-icons-left">
+                                <input 
+                                    class="input" 
+                                    type="text" 
+                                    placeholder="Search by title..." 
+                                    v-model="searchQuery"
+                                >
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                 </div>
             </div>
             
@@ -107,7 +149,7 @@ function playVideo(video) {
                     <div class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img :src="video.thumbnail || '/images/gridallbum1.png'" :alt="video.title">
+                                <img :src="'/storage/' + video.thumbnail_url || '/images/gridallbum1.png'" :alt="video.title">
                             </figure>
                             <div class="playButton floating-button"
                                 @click="playVideo(video)">
@@ -131,15 +173,24 @@ function playVideo(video) {
 
 <style scoped>
     @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap");
-    /* .playButton .playPause {
-        width: 25px;
-        height: 25px;
-        background: url(../images/play-xxl.png);
-        -webkit-background-size: 100%;
-        -moz-background-size: 100%;
-        background-size: 100%;
-    } */
+    .field .control.has-icons-left .icon {
+        color: #f40612;
+        height: 2.5em;
+    }
 
+    .input {
+        background-color: #2d2d2d;
+        border-color: #4a4a4a;
+        color: white;
+    }
+
+    .input::placeholder {
+        color: #7a7a7a;
+    }
+
+    .label {
+        color: white !important;
+    }
     #theme{
         color: #fff;
     }

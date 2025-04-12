@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 // Route::get('/', function () {
 //     return Inertia::render('Home', [
@@ -27,6 +28,11 @@ Route::get('/videos', function () {
     return Inertia::render('Videos');
 });
 
+Route::post('/videos', function (Request $request) {
+    return Inertia::render('Videos', [
+        'video' => $request->video
+    ]);
+})->name('videos.show');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

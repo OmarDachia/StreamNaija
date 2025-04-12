@@ -26,11 +26,12 @@ Route::prefix('videos')->group(function () {
     // return Inertia::render('Videos', [
     //     'videoUrl' => Storage::url('videos/01JRE4Q4J8N7JRRKZ80V3GZ211.mp4'),
     // ]);
-    Route::get('/', [VideoController::class, 'index','src' => Storage::url('videos/01JRE4Q4J8N7JRRKZ80V3GZ211.mp4'),]);         // List videos
+    Route::get('/', [VideoController::class, 'index']);         // List videos
     Route::get('{id}', [VideoController::class, 'show']);       // Get a single video
     Route::middleware(['auth:sanctum'])->post('/', [VideoController::class, 'store']);        // Create video
     Route::middleware(['auth:sanctum'])->put('{id}', [VideoController::class, 'update']);     // Update video
 });
+
 
 
 Route::prefix('categories')->group(function () {

@@ -71,7 +71,7 @@ class VideoResource extends Resource
                                 ->label('Video')
                                 ->image()
                                 ->acceptedFileTypes(['video/mp4', 'video/avi', 'video/mov'])
-                                ->disk('public')->directory('Videos')
+                                ->disk('public')->directory('videos')
                                 ->required(),
                             Checkbox::make('is_published')
                                     ->label('Is Published'),
