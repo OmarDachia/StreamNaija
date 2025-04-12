@@ -41,6 +41,16 @@ const filteredVideos = computed(() => {
     return videos.value.filter(video => video.category_id === selectedCategory.value);
 });
 
+// This will hold the selected video data
+const selectedVideo = ref(null)
+
+function playVideo(video) {
+  selectedVideo.value = {
+    url: `/storage/videos/${video.filename}`,
+    poster: video.thumbnail || '/images/fallback.jpg'
+  }
+}
+
 </script>
 
 <template>
@@ -99,7 +109,8 @@ const filteredVideos = computed(() => {
                             <figure class="image is-4by3">
                                 <img :src="video.thumbnail || '/images/gridallbum1.png'" :alt="video.title">
                             </figure>
-                            <div class="playButton floating-button">
+                            <div class="playButton floating-button"
+                                @click="playVideo(video)">
                                 <div class="playPause"></div>
                             </div>
                         </div>
