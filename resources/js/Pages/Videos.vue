@@ -34,64 +34,7 @@ defineOptions({ layout: BaseLayout})
                         </div>
                     </div> -->
                     <div class="col-md-12">
-                        <!-- videoSrc="{{ asset('storage/videos/me.mp4') }}" -->
-                        <!-- <VideoPlayer
-                            videoSrc="{{ asset('storage/videos/me.mp4') }}"
-                            poster="{{ asset('storage/videos/img1.jpg') }}"
-                            class="video-js vjs-big-play-centered"
-                            controls
-                            preload="auto"
-                            width="100%"
-                            height="100%">
-                            <source src="{{ asset('storage/videos/1.mp4') }}" type="video/mp4">
-                        </VideoPlayer> -->
-                        <!-- <div class="box-video">
-                            <div class="bg-video" style="background-image: url(https://unsplash.imgix.net/photo-1425036458755-dc303a604201?fit=crop&fm=jpg&q=75&w=1000);">
-                                <div class="bt-play">Play</div>
-                            </div> -->
-                            <!-- <div class="video-container"> -->
-                                <!-- <iframe width="100%" height="520" src="https://www.youtube.com/embed/j-_7Ub-Zkow?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen="allowfullscreen"></iframe> -->
-                                <div class="video-inner ">
-                                    <div class="agileits-main">
-                                        <!-- <h1 class="agileits-w3layouts">Colored video player</h1> -->
-                                        <div class="wthree-row w3-agile">
-                                            <div id="videoContainer">
-                                                <div class="overlay">
-                                                    <div class="button agileinfo"></div>
-                                                </div>
-                                                <div id="video" class="col-md-12">
-                                                    <video id ="v_play" src="/storage/videos/me.mp4"></video>
-                                                    <!-- <p>Your user agent does not support this Video element.</p> -->
-                                                </div>
-                                                <div id="controls">
-                                                    <div class="playButton">
-                                                        <div class="playPause"></div>
-                                                    </div>
-                                                    <div class="ProgressContainer">
-                                                        <div class="timer intialTime"> 00:00 </div>
-                                                        <div class="progressBar">
-                                                            <div class="progress"></div>
-                                                        </div>
-                                                        <div class="time"> 00:00 </div>
-                                                        <div class="timer fullTime"> 00:00 </div>
-                                                    </div>
-                                                    <div class="volume">
-                                                        <div class="icon"></div>
-                                                        <div class="intensityBar">
-                                                            <div class="intensity"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="scale">
-                                                        <div class="icon"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            <!-- </div> -->
-                        <!-- </div> -->
+                        <VideoPlayer :src="`storage/videos/01JRE4Q4J8N7JRRKZ80V3GZ211.mp4`" />
                     </div>
                 </div>
             </section>

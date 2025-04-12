@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::post('/login', function (Request $request) {
     $user = User::where('email', $request->email)->first();
@@ -22,11 +23,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::prefix('videos')->group(function () {
-    Route::get('/', [VideoController::class, 'index']);         // List videos
+    // return Inertia::render('Videos', [
+    //     'videoUrl' => Storage::url('videos/01JRE4Q4J8N7JRRKZ80V3GZ211.mp4'),
+    // ]);
+    Route::get('/', [VideoController::class, 'index','src' => Storage::url('videos/01JRE4Q4J8N7JRRKZ80V3GZ211.mp4'),]);         // List videos
     Route::get('{id}', [VideoController::class, 'show']);       // Get a single video
     Route::middleware(['auth:sanctum'])->post('/', [VideoController::class, 'store']);        // Create video
     Route::middleware(['auth:sanctum'])->put('{id}', [VideoController::class, 'update']);     // Update video
 });
+
 
 Route::prefix('categories')->group(function () {
     Route::get('/', [CategoryController::class, 'index']);         // List categories
