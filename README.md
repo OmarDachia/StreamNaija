@@ -219,10 +219,10 @@ a custom video player component with:
 1. Laravel 12
 2. vite/Vue
 3. filament
-4. jquery
 5. javascript
 
 ## Explanation of key architecture decisions 
 because of it flexiblity and portablity
 
 ## Note any incomplete features and how you would have completed them given more time 
+I wanted integrate My custom video player made using jquery from 2013 but the intigration was not successful. however build the a video player succesfully it seems to be working perfectly

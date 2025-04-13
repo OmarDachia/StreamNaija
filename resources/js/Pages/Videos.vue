@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import BaseLayout from '@/Components/BaseLayout.vue';
 import VideoPlayer from '@/Pages/VideoPlayer.vue';
 import { computed,  ref, onMounted } from 'vue';
+import { router } from '@inertiajs/vue3';
 
 defineOptions({ layout: BaseLayout})
 
@@ -13,13 +14,22 @@ const props = defineProps({
 const videoUrl = computed(() => '/storage/'+props.video.video_url);
 const posterUrl = computed(() => '/storage/'+props.video.thumbnail_url || 'storage/images/fallback.jpg');
 
-// onMounted(async () => {
-//     console.log(props.video);
-//     videoUrl = `/storage/${props.video.video_url}`;
-
-//     console.log(videoUrl);
+onMounted(async () => {
     
-// });	
+    if (!hasValidSource.value) {
+      goBack();
+    }
+    
+});	
+
+const hasValidSource = computed(() => {
+    return props.video && props.video !== null && props.video.video_url !== undefined;
+  });
+
+  // Redirect back function
+  const goBack = () => {
+    router.visit("/"); // Or your appropriate back route
+  };
 // const videoUrl = `/storage/${props.filename}`;
 </script>
 
@@ -29,7 +39,9 @@ const posterUrl = computed(() => '/storage/'+props.video.thumbnail_url || 'stora
         <section id="video" class="content-section">
             <div class="row">
                 <div class="col-md-12">
-                    <VideoPlayer :src="videoUrl" class="video-player"/>
+                    <div v-if="hasValidSource">
+                        <VideoPlayer :src="videoUrl" class="video-player"/>
+                    </div>
                 </div>
             </div>
         </section>
