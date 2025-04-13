@@ -226,3 +226,75 @@ because of it flexiblity and portablity
 
 ## Note any incomplete features and how you would have completed them given more time 
 I wanted integrate My custom video player made using jquery from 2013 but the intigration was not successful. however build the a video player succesfully it seems to be working perfectly
+
+## Technical Interview Questions
+## 1.	Explain your approach to the video player implementation. What considerations did you make for user experience?
+Answer:
+My approach involves using the native <video> HTML5 element or integrating a library like Video.js for more advanced features like custom controls, and responsive design.
+At first, I wanted integrate My custom video player made using jquery in 2013 but the integration was not successful. however, I was left with no option but to build a new video player using vue js, the Video player is not perfect but it works.
+
+For user experience, I considered:
+•	Responsive playback on different screen sizes.
+•	Buffering/loading feedback using a loading spinner.
+•	Fallback messages when a video fails to load.
+•	Autoplay behavior only when user interaction is present (to avoid poor UX)
+
+## 2.	How did you structure your Vue components? What patterns did you use for reusability?
+Answer:
+I structured components following atomic design principles:
+•	Pages like Home, Videos, and Dashboard.
+•	Reusable components like VideoPlayer.vue, BaseLayout.vue, and TextInput.vue.
+For reusability:
+•	I used props and emits for parent-child communication.
+•	Shared UI elements and layouts were extracted into a components/ directory.
+
+## 3. Describe your implementation of animations and transitions. How did you ensure they enhance rather than detract from the experience?
+
+Answer:
+I used Vue's built-in <transition> and <transition-group> components for smooth UI updates—e.g., fading in video lists or sliding details view.
+To enhance UX:
+•	I applied subtle, short animations (under 300ms).
+•	Ensured no performance lag on slower devices.
+•	Avoided overuse of animations which might distract users.
+## 4. What were the most challenging aspects of the assessment, and how did you approach them?
+Answer:
+One of the most challenging parts was attempting to integrate a custom video player I originally built using jQuery back in 2013. I was hopeful it would bring a unique, nostalgic touch to the project, but it quickly became clear that integrating legacy jQuery-based components into a modern Vue 3 setup wasn't practical. The DOM manipulation conflicted with Vue’s reactive system, and maintaining state became unnecessarily complex.
+After spending some time trying to make it work, I decided to pivot and build a fresh video player component using Vue.js and the Composition API. While the new player isn’t perfect yet, it’s fully functional, making it easier to maintain and extend. This experience reinforced the importance of adapting legacy ideas to modern frameworks instead of forcing compatibility.
+
+
+## 5. How would you scale this application to handle thousands of videos and users?
+Answer: Backend:
+•	Use pagination and Eloquent eager loading to minimize queries.
+•	Store videos using cloud storage (e.g., AWS S3) and stream via signed URLs.
+•	Queue video processing with Laravel Horizon + Redis.
+Frontend:
+•	Implement infinite scroll for video listings.
+•	Use CDN caching for video assets.
+•	Add caching and throttling on API endpoints.
+Database:
+•	Index columns like video_id, category_id, and user_id.
+•	Paginate older content
+## 6. What security considerations did you address in your implementation?
+Answer:
+•	Used Laravel Sanctum for API token-based authentication.
+•	Validated all inputs using Laravel's form request validation.
+•	Prevented XSS by escaping output and sanitizing data.
+•	Handled file uploads securely, checking MIME types and size limits.
+•	Prevented unauthorized access via route middleware.
+## 7. How would you implement real-time features like live comments using Laravel and Vue.js?
+Answer:
+•	Use Laravel Echo with Pusher or Socket.io for broadcasting events.
+•	In Vue.js, listen for CommentPosted events via Echo and dynamically update the comment list.
+•	Store comments via API (POST /api/videos/{id}/comments), and broadcast events upon saving.
+
+## 8. Describe how you would extend this project if you had more time.
+Answer:
+•	Add authentication UI for login/register using Vue and API tokens.
+•	Implement video thumbnail previews using generated frames.
+•	Enable user subscriptions and playlists.
+•	Add admin dashboard with analytics on video views/uploads.
+•	Integrate search and filter by title, category, and tags.
+•	Support video ratings, likes/dislikes, and a recommendation engine.
+
+
+

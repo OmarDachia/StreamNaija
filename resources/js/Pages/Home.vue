@@ -17,25 +17,6 @@ const selectedCategory = ref('all')
 const searchQuery = ref('');
 let lastVideo = ref({});
 
-// const filteredVideos = computed(() => {
-//     let filtered = videos.value;
-    
-//     // Apply category filter
-//     if (selectedCategory.value !== 'all') {
-//         filtered = filtered.filter(video => video.category_id === selectedCategory.value);
-//     }
-    
-//     // Apply search filter
-    // if (searchQuery.value) {
-    //     const query = searchQuery.value.toLowerCase();
-    //     filtered = filtered.filter(video => 
-    //         video.title.toLowerCase().includes(query)
-    //     );
-    // }
-    
-//     return filtered;
-// });
-
 onMounted(async () => {
     try {
         loading.value = true;
