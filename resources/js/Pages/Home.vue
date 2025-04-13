@@ -26,12 +26,12 @@ let lastVideo = ref({});
 //     }
     
 //     // Apply search filter
-//     if (searchQuery.value) {
-//         const query = searchQuery.value.toLowerCase();
-//         filtered = filtered.filter(video => 
-//             video.title.toLowerCase().includes(query)
-//         );
-//     }
+    // if (searchQuery.value) {
+    //     const query = searchQuery.value.toLowerCase();
+    //     filtered = filtered.filter(video => 
+    //         video.title.toLowerCase().includes(query)
+    //     );
+    // }
     
 //     return filtered;
 // });
@@ -60,10 +60,18 @@ onMounted(async () => {
 
 // Filter videos based on selected category
 const filteredVideos = computed(() => {
-    if (selectedCategory.value === 'all') {
-        return videos.value;
+    let filtered = selectedCategory.value === 'all' 
+        ? videos.value 
+        : videos.value.filter(video => video.category_id === selectedCategory.value);
+
+    if (searchQuery.value) {
+        const query = searchQuery.value.toLowerCase();
+        filtered = filtered.filter(video => 
+            video.title.toLowerCase().includes(query)
+        );
     }
-    return videos.value.filter(video => video.category_id === selectedCategory.value);
+
+    return filtered;
 });
 
 function playVideo(video) {
