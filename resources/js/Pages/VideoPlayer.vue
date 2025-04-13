@@ -42,6 +42,7 @@
 
   <template>
     <div class="video-player-container">
+      
       <video
         ref="videoElement"
         :src="src"
@@ -49,8 +50,11 @@
         class="video-js vjs-big-play-centered"
         @click="togglePlay"
         @timeupdate="updateProgress"
+        tabindex="0"
+        @keydown="handleContainerKeyDown"
       >
-        Your browser does not support the video tag.
+        Fail to loading video, please click here to return home.
+        <button class="button is-medium" @click="goBack()">Home</button>
       </video>
       
       <div class="video-controls" :class="{ 'controls-visible': showControls }">
@@ -88,6 +92,12 @@
           </button>
         </div>
       </div>
+
+      <p id="videoControlsDesc" class="sr-only">
+        Keyboard controls: Space or K to play/pause, M to mute, F for fullscreen,
+        Arrow left/right to skip 5 seconds, Arrow up/down to adjust volume,
+        0-9 to jump to percentage
+      </p>
     </div>
   </template>
   
@@ -113,6 +123,17 @@
   const showControls = ref(true);
   let controlsTimeout;
   
+  const goBack = () => {
+    router.visit("/"); // Or your appropriate back route
+  };
+
+  const handleContainerKeyDown = (e) => {
+    // Prevent double handling when focus is on container
+    if ([' ', 'f', 'm', 'k'].includes(e.key)) {
+      e.preventDefault();
+    }
+  };
+
   // Computed properties
   const volumeLevelClass = computed(() => {
     if (volume.value === 0) return 'fas fa-volume-off';
@@ -261,14 +282,106 @@
     videoElement.value.addEventListener('durationchange', () => {
       duration.value = videoElement.value.duration;
     });
+
+    const handleKeyDown = (e) => {
+      if (!videoElement.value) return;
+      
+      switch (e.key) {
+        case ' ':
+        case 'k':
+          e.preventDefault();
+          togglePlay();
+          break;
+        case 'm':
+          e.preventDefault();
+          toggleMute();
+          break;
+        case 'f':
+          e.preventDefault();
+          toggleFullscreen();
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          skip(-5); // 5 seconds back
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          skip(5); // 5 seconds forward
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          adjustVolume(0.1); // Increase volume
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          adjustVolume(-0.1); // Decrease volume
+          break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+          e.preventDefault();
+          seekToPercentage(Number(e.key) * 0.1); // Jump to 0%, 10%, etc.
+          break;
+      }
+    };
   });
   
+  // window.addEventListener('keydown', handleKeyDown);
+
   onBeforeUnmount(() => {
     clearTimeout(controlsTimeout);
+    // window.removeEventListener('keydown', handleKeyDown);
   });
+
+  const skip = (seconds) => {
+    videoElement.value.currentTime += seconds;
+    resetControlsTimer();
+  };
+
+  // Adjust volume by delta
+  const adjustVolume = (delta) => {
+    volume.value = Math.max(0, Math.min(1, volume.value + delta));
+    videoElement.value.volume = volume.value;
+    resetControlsTimer();
+  };
+
+  // Seek to percentage of video (0-1)
+  const seekToPercentage = (percent) => {
+    videoElement.value.currentTime = percent * duration.value;
+    resetControlsTimer();
+  };
   </script>
   
   <style scoped>
+  .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    .video-player-container:focus {
+      outline: 2px solid #f40612;
+      outline-offset: 2px;
+    }
+
+    .control-btn:focus {
+      outline: 2px solid white;
+      outline-offset: 2px;
+    }
+
   .video-player-container {
     position: relative;
     width: 100%;
