@@ -34,7 +34,7 @@ class VideoResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('id')
                             ->disabled()
-                            ->required()
+                            // ->required()
                             ->numeric(),
                         Forms\Components\Select::make('category_id')
                             ->required()

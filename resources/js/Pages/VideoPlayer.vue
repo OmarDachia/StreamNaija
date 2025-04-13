@@ -3,7 +3,8 @@
     <video
       :src="src"
       controls
-      class="w-full max-w-3xl rounded shadow"
+      classs="w-full max-w-3xl rounded shadow"
+      class="video-js vjs-big-play-centered"
       :poster="poster"
     >
       <!-- <source :src="src" /> -->
@@ -28,9 +29,16 @@
   
   <style>
   .video-player {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 60vh;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+  }
+
+  .video-js {
+      width: 100%;
+      height: 100%;
+      min-height: 400px; /* Minimum height */
+  }
+
   </style>

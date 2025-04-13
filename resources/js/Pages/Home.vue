@@ -15,7 +15,7 @@ const loading = ref(false);
 const error = ref(null);
 const selectedCategory = ref('all')
 const searchQuery = ref('');
-const lastVideo = ref([]);
+let lastVideo = ref({});
 
 // const filteredVideos = computed(() => {
 //     let filtered = videos.value;
@@ -45,7 +45,7 @@ onMounted(async () => {
         videos.value = videos.value.data;
 
         lastVideo = videos.value[videos.value.length - 1];
-        console.log('Last video:', lastVideo);
+        // console.log('Last video:', lastVideo);
         // category
         const cat_response = await fetch(import.meta.env.VITE_API_BASE_URL + '/api/categories');
         if (!cat_response.ok) throw new Error('Network response was not ok');
@@ -79,12 +79,12 @@ function playVideo(video) {
         <div class="top">
             <div class="columns">
                 <div class="column is-full featured_wrapper p-0">
-                    <!-- <img :src="'/storage/' +  lastVideo.thumbnail_url" class="featured"> -->
-                    <img src="/images/gridallbum10.png" class="featured">
+                    <img :src="'/storage/' +  lastVideo.thumbnail_url" class="featured">
+                    <!----<img src="/images/gridallbum10.png" class="featured">-->
                     <div class="title_wrapper">
                         <span class="has-text-white">Trending Today</span>
-                        <h1 class="title is-1 has-text-white">The Untold Story of the great Me man</h1>
-                        <button class="button is-medium">Watch It Now</button>
+                        <h1 class="title is-1 has-text-white">{{lastVideo.title}}</h1>
+                        <button class="button is-medium" @click="playVideo(lastVideo)">Watch It Now</button>
                     </div>
                 </div>
             </div>
