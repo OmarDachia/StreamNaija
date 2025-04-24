@@ -1,7 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
 import BaseLayout from '@/Components/BaseLayout.vue';
-import VideoPlayer from '@/Pages/VideoPlayer.vue';
+import VideoPlayer from '@/Components/VideoPlayer.vue';
 import { computed,  ref, onMounted } from 'vue';
 import { router } from '@inertiajs/vue3';
 

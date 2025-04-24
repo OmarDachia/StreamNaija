@@ -147,7 +147,7 @@ function playVideo(video) {
                         </div>
                         <div class="card-content">
                             <div class="content">
-                                <h3 class="title is-5 has-text-white text-center">{{ video.title }}</h3>
+                                <h3 class="title shas-text-white text-center">{{ video.title }}</h3>
                                 <!-- <p class="subtitle is-6 has-text-grey-light">{{ video.category }}</p> -->
 
                                 <h5 class=" has-text-white text-center">Category: {{video.category.name }}</h5>
@@ -183,7 +183,6 @@ function playVideo(video) {
     #theme{
         color: #fff;
     }
-    
     
     .column.is-one-quarter {
         position: relative; /* Needed for absolute positioning of the button */
